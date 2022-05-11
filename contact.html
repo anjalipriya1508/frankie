@@ -1,0 +1,91 @@
+<?php include('partials-front/menu.php');
+ 
+ if(isset($_SESSION['add'])) //Checking whether the SEssion is Set of Not
+            {
+                echo $_SESSION['add']; //Display the SEssion Message if SEt
+                unset($_SESSION['add']); //Remove Session Message
+            }
+        ?>
+
+ 
+
+          //<form action="contact.html" autocomplete="off">
+ <form action="" method="POST">
+            <h3 class="title">Contact us</h3>
+            <div class="input-container">
+              <input type="text" name="name" class="input" />
+              <label for="">Username</label>
+              <span>Username</span>
+            </div>
+            <div class="input-container">
+              <input type="email" name="email" class="input" />
+              <label for="">Email</label>
+              <span>Email</span>
+            </div>
+            <div class="input-container">
+              <input type="tel" name="phone" class="input" />
+              <label for="">Phone</label>
+              <span>Phone</span>
+            </div>
+            <div class="input-container textarea">
+              <textarea name="review" class="input"></textarea>
+              <label for="">Message</label>
+              <span>Message</span>
+            </div>
+            <input type="submit" value="Send" class="btn" />
+          </form>
+        </div>
+      </div>
+    </div>
+     <?php 
+        
+            //CHeck whether the Submit Button is Clicked or Not
+            if(isset($_POST['submit']))
+            {
+                //echo "Clicked";
+
+                //1. Get the Value from CAtegory Form
+                $username= $_POST['name'];
+                $email= $_POST['email'];
+$phone= $_POST['phone'];
+$review= $_POST['review'];
+                //For Radio input, we need to check whether the button is selected or not
+                
+                        
+
+                //2. Create SQL Query to Insert CAtegory into Database
+                $sql = "INSERT INTO message SET 
+                    username='$username',
+                   email='$email',
+                    phone='$phone',
+                    review='$review'
+                ";
+
+    
+                $res = mysqli_query($conn, $sql);
+
+             
+                if($res==true)
+                {
+                    //Query Executed and Category Added
+                    $_SESSION['add'] = "<div class='success'>Message sent Successfully.</div>";
+                    //Redirect to Manage Category Page
+                   // header('location:'.SITEURL.'contact.php');
+
+
+                }
+                else
+                {
+                    $_SESSION['add'] = "<div class='error'>Failed to Send Message.</div>";
+                    
+                   // header('location:'.SITEURL.'admin/add-category.php');
+                }
+            }
+        
+        ?>
+
+    </div>
+</div>
+   
+  </body>
+</html>

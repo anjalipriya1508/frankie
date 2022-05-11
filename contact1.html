@@ -1,0 +1,96 @@
+<?php include('partials-front/menu.php'); ?>
+
+<div class="main-content">
+    <div class="wrapper">
+        <h1>Add Admin</h1>
+
+        <br><br>
+
+        
+        <form action="" method="POST">
+
+            <table class="tbl-30">
+                <tr>
+                    <td>User Name: </td>
+                    <td>
+                        <input type="text" name="user_name" placeholder="Enter Your Name">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Email: </td>
+                    <td>
+                        <input type="text" name="email" >
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Phone no. : </td>
+                    <td>
+                        <input type="text" name="phone" >
+                    </td>
+                </tr>
+<tr>
+                    <td>Review: </td>
+                    <td>
+                        <input type="text" name="review" >
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="submit" value="Send" class="btn-secondary">
+                    </td>
+                </tr>
+
+            </table>
+
+        </form>
+
+
+    </div>
+</div>
+
+
+
+
+<?php 
+    
+
+    if(isset($_POST['submit']))
+    {
+        
+        $username = $_POST['user_name'];
+        $email = $_POST['email'];
+$phone = $_POST['phone'];
+$review = $_POST['review'];
+      
+
+        //2. SQL Query to Save the data into database
+        $sql = "INSERT INTO message SET 
+            username='$username',
+            email='$email',
+            phone='$phone',
+            review='$review'
+        ";
+ 
+        //3. Executing Query and Saving Data into Datbase
+        $res = mysqli_query($conn, $sql) ;
+
+        //4. Check whether the (Query is Executed) data is inserted or not and display appropriate message
+        if($res==TRUE)
+        {
+            
+<div style="font-size:40px;">Message sent Successfully.</div>
+          
+        }
+        else
+        {
+            
+<div style="font-size:40px;">Failed to sent message.</div>
+            
+        }
+
+    }
+    
+?>
